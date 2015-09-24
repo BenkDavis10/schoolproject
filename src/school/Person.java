@@ -1,116 +1,107 @@
-
 package school;
-
 import java.util.ArrayList;
-
+import java.util.Calendar;
 public class Person {
-  enum Gender { //makes multiple types isnstead of using final int 
-      Male,Female
-  }  
+    enum Gender {
+        Male,Female
+    }
+    protected static ArrayList<Person> people = new ArrayList<Person>();
+    private String name;
+    private Gender gender;
+    private int weight;
     
-  private Gender gender;
-  private String name; 
-  private int weight; 
-//  private static int numpeople = 10; 
-  private static int currentpeopleindex = 0; 
-  private static ArrayList <Person> people = new ArrayList <Person>();
-  
-  
-//  private static Person people[] = new Person[numpeople];
-  
-  
-  public static Person addPerson(String _name, Gender _gender, int _weight, int age)
-  {
-      
-   Person temp = new Person(_name,_gender,_weight); 
-  people.add(temp); 
-   return(temp);
-  }
-  
- Person()
- {
-     name = "---";
-     gender = Gender.Male;  
-        
-      
-  }
- Person(String _name,Gender _gender,int _weight)
- {
-     name = _name;
-     gender =_gender;  
-        
-      
-  }
+    private int birthDay;
+    private int birthMonth;
+    private int birthYear;
+    
+
+    public static Person addPerson(String _name,
+    Gender _gender, int _weight)
+    {
+        Person temp = new Person(_name,_gender,_weight);
+        people.add(temp);
+        return(temp);
+    }
+    public static void addPerson(Person _person)
+    {
+        people.add(_person);
+    }
+    Person()
+    {
+        name = "NoneForSure";
+        gender = Gender.Female;
+        weight = 100;
+    }
+    Person(String _name,Gender _gender,int _weight)
+    {
+        name = _name;
+        gender = _gender;
+        weight = _weight;
+    }   
+    
+    public void setBirthdate
+    (int _day,int _month,int _year)
+    {
+        birthDay = _day;
+        birthMonth = _month;
+        birthYear = _year;
+          
+    }
+    public int getAge()
+    {
+        Calendar now = Calendar.getInstance();
+        int day = now.get(Calendar.DAY_OF_MONTH);
+        int month = now.get(Calendar.MONTH) + 1;
+        int year = now.get(Calendar.YEAR);
+        return(0);
+    }
  
-   public void setName(String _name)
- {
-   
-       name = _name; 
-      
-  }
-      public void setGender(Gender _gender)
- {
-   
-       gender = _gender; 
-      
-  }
-  public void setWeight(int _weight)
- {
-   
-       weight = _weight; 
-      
-  }
-  public String getName()
- {
-   
-        return (name);
-      
-  }
-  
-   public Gender getGender()
- {
-   return (gender);
-      
-  }
-   
-      public int getWeight()
- {
-   return (weight);
-      
-  }
-   public static void printNames()
-   {
-       for (Person temp : people)
-       {
-//           if (temp != null)
-//           {
-       
-               System.out.println(temp.getName());
-//           }
-           }
-       }
-   
-
-     public static void printGender(Gender _gender)
-   {
-       System.out.println("===print_Gender===" + _gender);
-       for (Person temp : people)
-       {
-
-           if (temp.getGender() == _gender)
-           {
-               System.out.println(temp.getName());
-
-           }
-       }
-   }
+    
+    public void setWeight(int _weight)
+    {
+        weight = _weight;
+    }
+    public int getWeight()
+    {
+        return(weight);
+    }       
+    public void setName(String _name)
+    {
+        name = _name;
+    }
+    public String getName()
+    {
+        return(name);
+    }    
+    public void setGender(Gender _gender)
+    {
+        gender = _gender;
+    }
+    public Gender getGender()
+    {
+        return(gender);
+    }  
+    public static void printNames()
+    {
+        System.out.println("===printNames===");
+        for (int index=0;index<people.size();index++)
+        {
+                System.out.println(people.get(index).getName());
+        }        
+    }
+    public static void printNames(Gender _gender)
+    {
+        System.out.println(
+        "===printNamesOfGender=== " + _gender);
+        for (Person temp : people)
+        {
+            if (temp.gender == _gender)
+                System.out.println(temp.getName());
+        }
+             
+    }    
     public String toString()
     {
-      return("Hi my name is" + name + "I am a" + gender + "I wieght" + weight + "pounds");  
-
-     
-      
-      
+        return(name + " " + gender + " " + weight);
     }
-
 }
