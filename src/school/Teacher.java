@@ -1,32 +1,35 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package school;
-public class Student extends Person{
-    private int gradeLevel;
-//    private Course theCourse;
+public class Teacher extends Person{
+
+    private double meanLevel;
+    private Course theCourse;
     private Course courses[] = new Course[4];
     
-    
-    public static Student addStudent(String _name,
-    Gender _gender, int _weight,int _gradeLevel)
+    public static Teacher addTeacher(String _name,
+    Gender _gender, int _weight,double _meanLevel)
     {
-        Student temp = new Student(_name,_gender,_weight,
-        _gradeLevel);
+        Teacher temp = new Teacher(_name,_gender,_weight,
+        _meanLevel);
         addPerson(temp);
         return(temp);
     }    
-    Student (String _name,Gender _gender,int _weight,
-    int _gradeLevel)
+    Teacher (String _name,Gender _gender,int _weight,
+    double _meanLevel)
     {
         super(_name,_gender,_weight);
-        gradeLevel = _gradeLevel;
+        meanLevel = _meanLevel;
     }
-    
-    public boolean addCourse(Course _course)
+  public boolean addCourse(Course _course)
     {
         if (!setCourseOK(_course))
             return(false);
-        if (!_course.setStudentOK(this))
+        if (!_course.setTeacherOK(this))
             return(false);
-        _course.setStudentDoIt(this);
+        _course.setTeacherDoIt(this);
         setCourseDoIt(_course);
         return(true);
     }  
@@ -42,14 +45,14 @@ public class Student extends Person{
     {
         courses[_course.getPeriod()-1]=_course;
     }
-    
-    public void setGradeLevel(int _gradeLevel)
+         
+    public void setMeanLevel(int _meanLevel)
     {
-        gradeLevel = _gradeLevel;
+        meanLevel = _meanLevel;
     }
-    public int getGradeLevel()
+    public double getMeanLevel()
     {
-        return(gradeLevel);
+        return(meanLevel);
     }        
     public static void printNames()
     {
@@ -57,21 +60,21 @@ public class Student extends Person{
         "===printNamesOf=== ");
         for (Person temp : people)
         {
-            if (temp instanceof Student)
+            if (temp instanceof Teacher)
                 System.out.println(temp.getName());
         }
              
-    }
-    public void printTeachersNames()
+    }   
+    public void printStudentsNames()
     {
-        System.out.println(getName() + " is taught by");
+        System.out.println(getName() + " teaches");
         for (Course temp : courses)
         {
             if (temp != null)
             {
-                if (temp.getTeacher() != null)
+                for (int index = 0;index < temp.getNumStudents();index++)
                 {
-                    System.out.println(temp.getTeacher().getName());
+                    System.out.println(temp.getStudent(index).getName());
                 }
             }
         }
