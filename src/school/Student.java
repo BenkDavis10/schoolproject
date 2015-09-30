@@ -1,9 +1,16 @@
 package school;
+
+import static school.Person.ANSI_BLUE;
+import static school.Person.ANSI_RED;
+
 public class Student extends Person{
+      
+      
+        
     private int gradeLevel;
 //    private Course theCourse;
-    private Course courses[] = new Course[4];
-    
+    private Course courses[] = new Course[Course.numPeriods];
+     private double gradeScore[] = new double[Course.numPeriods];
     
     public static Student addStudent(String _name,
     Gender _gender, int _weight,int _gradeLevel)
@@ -20,14 +27,14 @@ public class Student extends Person{
         gradeLevel = _gradeLevel;
     }
     
-    public boolean addCourse(Course _course)
+    public boolean addCourse(Course _course, double _grade)
     {
         if (!setCourseOK(_course))
             return(false);
         if (!_course.setStudentOK(this))
             return(false);
         _course.setStudentDoIt(this);
-        setCourseDoIt(_course);
+        setCourseDoIt(_course, _grade);
         return(true);
     }  
     public boolean setCourseOK(Course _course)
@@ -38,9 +45,10 @@ public class Student extends Person{
             return(false);
         return(true);
     }
-    public void setCourseDoIt(Course _course)
+    public void setCourseDoIt(Course _course, double _grade)
     {
         courses[_course.getPeriod()-1]=_course;
+        gradeScore[_course.getPeriod()-1]=_grade;
     }
     
     public void setGradeLevel(int _gradeLevel)
@@ -51,6 +59,25 @@ public class Student extends Person{
     {
         return(gradeLevel);
     }        
+    
+    public double getGPA()
+    {
+   double total = 0;
+   int numCourses = 0; 
+     for(int index = 0; index < Course.numPeriods; index++)
+     {
+         if (courses[index] !=null)
+         {
+             total += gradeScore[index] ;
+             numCourses ++ ;
+         }
+     }
+     if (numCourses == 0)
+         return(0.0);
+     return(total/numCourses); 
+    }
+    
+    
     public static void printNames()
     {
         System.out.println(
@@ -75,5 +102,26 @@ public class Student extends Person{
                 }
             }
         }
+    }
+     public static void printNamesofGPAGreaterThan(double _GPA)
+    {
+        
+        
+        System.out.println(ANSI_PURPLE + "===printGPAhigherthan"+_GPA+"===" + ANSI_PURPLE);
+        for (Person temp : people)
+        {
+           if (temp instanceof Student)
+           {
+               Student student = (Student)temp; 
+               
+            if (_GPA < student.getGPA())
+            {
+                System.out.println(ANSI_BLUE + student.getName() + ANSI_BLUE);
+                System.out.println(student.getGPA());
+            }
+
+           }
+        }
+             
     }
 }

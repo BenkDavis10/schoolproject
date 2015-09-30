@@ -7,7 +7,7 @@ public class Teacher extends Person{
 
     private double meanLevel;
     private Course theCourse;
-    private Course courses[] = new Course[4];
+    private Course courses[] = new Course[Course.numPeriods];
     
     public static Teacher addTeacher(String _name,
     Gender _gender, int _weight,double _meanLevel)

@@ -17,13 +17,18 @@ public class School {
         Course geom =  Course.addCourse("Geometry", Course.Type.Math, 1);
         Course photo =  Course.addCourse("Photography", Course.Type.Elective, 3);       
         Course biology =  Course.addCourse("Biology", Course.Type.Science, 2);       
-        Course worldHistory =  Course.addCourse("WorldHistory", Course.Type.History, 2);       
+        Course worldHistory =  Course.addCourse("WorldHistory", Course.Type.History, 2);  
+         Course art =  Course.addCourse("Art", Course.Type.Elective, 4);
 
-        geom.addStudent(bobby);
-        photo.addStudent(jill);
-        biology.addStudent(ann);
-        worldHistory.addStudent(sean);
-         
+        geom.addStudent(bobby,4.0);
+         biology.addStudent(bobby,4.0);
+          geom.addStudent(bobby,4.0);
+           photo.addStudent(bobby,3.8);
+        photo.addStudent(jill,3.2);
+      //  biology.addStudent(ann);
+        worldHistory.addStudent(sean,2.7);
+         ann.addCourse(biology, 3.9); 
+        
         geom.addTeacher(price);
         photo.addTeacher(anderson);
         biology.addTeacher(smith);
@@ -39,6 +44,14 @@ public class School {
          
         ann.printTeachersNames();
         
+       Student.printNamesofGPAGreaterThan(3.5);
+       
+       
+       
+
+       
+       
+       
        
     }
 }

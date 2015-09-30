@@ -2,6 +2,7 @@
 package school;
 import java.util.ArrayList;
 public class Course {
+    public static final int numPeriods = 4; 
     enum Type {
         Math,Science,English,History,Language,Elective,PE
     }
@@ -40,13 +41,13 @@ public class Course {
     }   
 
 
-    public boolean addStudent(Student _student)
+    public boolean addStudent(Student _student, double _grade)
     {
         if (!setStudentOK(_student))
             return(false);
         if (!_student.setCourseOK(this))
             return(false);
-        _student.setCourseDoIt(this);
+        _student.setCourseDoIt(this,_grade);
         setStudentDoIt(_student);
         return(true);
     }  
